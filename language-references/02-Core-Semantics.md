@@ -35,21 +35,21 @@ The syntax for kinds is given as the following BNF grammar of three layers with 
 category:
 
 ```text
-ε ::=                -- the element kind
+ε ::=                 -- the element kind
     | Type            -- the kind to which every Core term belongs
     | Effect          -- the kind to which every effect belongs
   
-q ::=               -- The quantifiable kinds
-    | k             -- kind variable
-    | Type          -- same as above
-    | Row ε        -- the row kind
-    | q1 -> q2      where result(q2) = Type
+q ::=                 -- The quantifiable kinds
+    | k               -- kind variable
+    | Type            -- same as above
+    | Row ε           -- the row kind
+    | q1 -> q2        where result(q2) = Type
 
-φ ::=             -- effect-producing kinds
-    | Effect       -- same as above
-    | q -> φ      -- kind of effect constructors
+φ ::=                 -- effect-producing kinds
+    | Effect          -- same as above
+    | q -> φ          -- kind of effect constructors
 
-κ ::=             -- kinds
+κ ::=                 -- kinds
     | q
     | φ
 ```
@@ -85,7 +85,7 @@ The syntax for kind schemes is given as:
 
 ```plain
 Ψ ::=                  -- kind schemes
-    | forall k̄. q       where result(q) = Type
+    | forall k̄. q      where result(q) = Type
 ```
 
 This grammar immediately implies that every kind scheme has a prenex form (i.e., rank-1
@@ -110,15 +110,15 @@ It means that in local context `Γ`, `κ` is a valid kind.
 The kind well-formedness is given by the following rules:
 
 ```plain
-──────── KW-Type               ───────── KW-Effect
+ -------------- KW-Type               ---------------- KW-Effect
   Γ⊢ Type kind                         Γ⊢ Effect kind
 
   k ∈ Γ                             Γ ⊢ κ1 kind    Γ ⊢ κ2 kind
-───── KW-KVar                  ───────────────── KW-TyCtor
-Γ⊢ k kind                                Γ ⊢ (κ1 -> κ2) kind
+ --------- KW-KVar                  ---------------------------- KW-TyCtor
+ Γ⊢ k kind                              Γ ⊢ (κ1 -> κ2) kind
 
    κ element
-────────── KW-RowElem
+ ---------------- KW-RowElem
  Γ⊢ (Row κ) kind
 ```
 
